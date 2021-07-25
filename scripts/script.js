@@ -35,16 +35,6 @@ client.init("b78dfadc51914daeb2cbebe9e4ae3818", function() {
     console.log("client init failed ", err);
 });
 
-
-// Initialize the local stream
-localStream.init(() => {
-    // Play the local stream
-    localStream.play("me");
-    // Publish the local stream
-    client.publish(localStream, handleError);
-}, handleError);
-
-
 // Join a channel
 client.join("006b78dfadc51914daeb2cbebe9e4ae3818IACfJNirGSm1rFMzZ6o1K2C+awNmtQEnIbxOU6avCEsE7MKSUqwAAAAAEAD7XOPUQ6H+YAEAAQDeoP5g", "me", null, (uid) => {
     // Create a local stream
@@ -80,5 +70,14 @@ client.on("peer-leave", function(evt) {
     stream.close();
     removeVideoStream(streamId);
 });
-//client.enableVideo();
+
+// Initialize the local stream
+localStream.init(() => {
+    // Play the local stream
+    localStream.play("me");
+    // Publish the local stream
+    client.publish(localStream, handleError);
+}, handleError);
+
+
 //https://console.agora.io/invite?sign=5d00add662706fee5c9f47765d2ce6e0%3Aefd0609b9a7e83e4b3cb24268c4bd2eae32cb8c99e878b62ff2e21836130106d
